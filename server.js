@@ -77,9 +77,8 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .addFavourite(req.user._id, req.body)
+      .addFavourite(req.user._id, req.params.id)
       .then((list) => {
-        console.log(req.body);
         res.json({ message: list });
       })
       .catch((msg) => res.status(422).json({ message: "error" }));
@@ -90,9 +89,8 @@ app.delete(
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       userService
-        .removeFavourite(req.user._id, req.body)
+        .removeFavourite(req.user._id, req.params.id)
         .then((list) => {
-          console.log(req.body);
           res.json({ message: list });
         })
         .catch((msg) => res.status(422).json({ message: "error" }));
